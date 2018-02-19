@@ -1,34 +1,59 @@
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+
+        System.out.print("Enter a hexadecimal number: ");
+        Scanner scnr = new Scanner(System.in);
+
+        String s = scnr.next();
+
+        //git change
 
 
-import java.util.*;
-        import java.lang.*;
-        import java.io.*;
 
-public class Main
-{
-    public static void main (String[] args) throws java.lang.Exception
-    {
-        Scanner in = new Scanner(System.in);
 
-        String hexString = in.nextLine();
+        char num = s.charAt(0);
 
-        System.out.println(toDecimal(hexString));
+        int value = 0;
+        long result = 0;
+        long pow = 1;
 
-    }
+        if (s.length() > 2) {
+            if (s.charAt(1) == 'x'){
+                s= s.substring(2);
 
-    public static long toDecimal(String hexString){
-
-        hexString.toLowerCase();
-        hexString = hexString.substring(1);
-
-        long decimal = 0L;
-
-        for(int i = 0; i < hexString.length(); ++i){
-            decimal *= 16;
-            char hexChar = hexString.charAt(i);
-            decimal += (hexChar >= 'a' && hexChar <= 'z') ? hexChar - 'a' + 10 : hexChar - '0';
+            }
         }
 
-        return decimal;
+        int index = s.length() -1;
+
+        s= s.toUpperCase();
+
+
+        while (index >= 0) {
+
+            num = s.charAt(index);
+
+            if (num >= 'A' && num <= 'F') {
+                value = num - 'A' + 10;
+            }
+
+            if (num >= '0' && num <= '9') {
+                value = num - '0';
+            }
+
+
+            result += value * pow;
+            pow = pow * 16;
+
+            index--;
+
+        }
+
+
+        System.out.print("Your number is " +result + " in decimal");
+
     }
 }
+
